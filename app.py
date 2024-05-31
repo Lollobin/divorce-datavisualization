@@ -12,28 +12,30 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 @app.route('/')
 def data():
     # load data files
-    divorceDistrictAbsoluteDf = pd.read_csv('static/data/scheidung-bezirk-absolut-2023.CSV', index_col=0)
+    divorceDistrictAbsoluteDf = pd.read_csv('static/data/scheidung-bezirk-absolut-2023.CSV',
+                                            encoding='latin1', delimiter=";")
     divorceDistrictAbsolute = divorceDistrictAbsoluteDf.to_dict('records')
 
-    divorceDistrictPro1kDf = pd.read_csv('static/data/scheidung-bezirk-pro1k-2023.CSV', index_col=0)
+    divorceDistrictPro1kDf = pd.read_csv('static/data/scheidung-bezirk-pro1k-2023.CSV', encoding='latin1', delimiter=";")
     divorceDistrictPro1k = divorceDistrictPro1kDf.to_dict('records')
 
-    divorceMarriageDurationDf = pd.read_csv('static/data/scheidung-ehedauer-prozent.CSV', index_col=0)
+    divorceMarriageDurationDf = pd.read_csv('static/data/scheidung-ehedauer-prozent.CSV',
+                                            encoding='latin1', delimiter=";")
     divorceMarriageDuration = divorceMarriageDurationDf.to_dict('records')
 
-    divorceTotal1946Df = pd.read_csv('static/data/scheidung-gesamt-1946.CSV', index_col=0)
+    divorceTotal1946Df = pd.read_csv('static/data/scheidung-gesamt-1946.CSV', encoding='latin1', delimiter=";")
     divorceTotal1946 = divorceTotal1946Df.to_dict('records')
 
-    divorceLandAbsoluteDf = pd.read_csv('static/data/scheidung-land-absolut.CSV', index_col=0)
+    divorceLandAbsoluteDf = pd.read_csv('static/data/scheidung-land-absolut.CSV', encoding='latin1', delimiter=";")
     divorceLandAbsolute = divorceLandAbsoluteDf.to_dict('records')
 
-    divorceLandPro1kDf = pd.read_csv('static/data/scheidung-land-pro1k.CSV', index_col=0)
+    divorceLandPro1kDf = pd.read_csv('static/data/scheidung-land-pro1k.CSV', encoding='latin1', delimiter=";")
     divorceLandPro1k = divorceLandPro1kDf.to_dict('records')
 
-    divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-pro1k.CSV', index_col=0)
+    divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-prozent.CSV', encoding='latin1', delimiter=";")
     divorceLandPercent = divorceLandPercentDf.to_dict('records')
 
-    divorceMonthlyDf = pd.read_csv('static/data/scheidung-land-pro1k.CSV', index_col=0)
+    divorceMonthlyDf = pd.read_csv('static/data/scheidung-monat-2005.CSV', encoding='latin1', delimiter=";")
     divorceMonthly = divorceMonthlyDf.to_dict('records')
 
     # return the index file and the data
