@@ -1,7 +1,8 @@
 const states = Array.from(new Set(divorceMonthly.map(d => d.Bundesland)));
 
+const months = ["Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+
 const nestedData = d3.group(divorceMonthly, d => d.Bundesland);
-const nestedDataCleaned = new Map([...nestedData].map(([key, value]) => [key.trim(), value]));
 
 // Populate dropdown menu
 const stateSelector = d3.select("#stateSelector");
@@ -12,12 +13,12 @@ stateSelector.selectAll("option")
     .text(d => d);
 
 // Set initial state to display
-updateChart(nestedDataCleaned.get(states[0]));
+updateChart(nestedData.get(states[0]));
 
 // Update chart when a different state is selected
 stateSelector.on("change", function () {
     const selectedState = this.value;
-    const selectedData = nestedDataCleaned.get(selectedState);
+    const selectedData = nestedData.get(selectedState);
     updateChart(selectedData);
 });
 
@@ -44,11 +45,11 @@ function updateChart(data) {
 
     // Create scales
     const x = d3.scalePoint()
-        .domain(["Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"])
-        .range([0, width-60]);
+        .domain(months)
+        .range([0, width - 60]);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d3.max([d.Jänner, d.Februar, d.März, d.April, d.Mai, d.Juni, d.Juli, d.August, d.September, d.Oktober, d.November, d.Dezember]))])
+        .domain([0, d3.max(data, d => d3.max([d.Jänner_per_1k, d.Februar_per_1k, d.März_per_1k, d.April_per_1k, d.Mai_per_1k, d.Juni_per_1k, d.Juli_per_1k, d.August_per_1k, d.September_per_1k, d.Oktober_per_1k, d.November_per_1k, d.Dezember_per_1k]))])
         .range([height, 0]);
 
     // Create axes
@@ -69,20 +70,17 @@ function updateChart(data) {
     // Group data by year
     const groupedData = d3.group(data, d => d.Jahr);
 
-    // Prepare data for each year
-    const months = ["Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-
     groupedData.forEach((values, key) => {
         const lineData = months.map(month => ({
             month: month,
-            value: d3.sum(values, d => d[month])
+            value: d3.sum(values, d => d[`${month}_per_1k`])
         }));
 
         // Add the line to the chart
         svg.append("path")
             .datum(lineData)
             .attr("fill", "none")
-            .attr("stroke", d3.schemeCategory10[key % 10]) // Use D3 color scheme for different colors
+            .attr("stroke", d3.schemeSet3[key % 12]) // Use D3 color scheme for different colors
             .attr("stroke-width", 1.5)
             .attr("d", line);
     });

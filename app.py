@@ -16,7 +16,8 @@ def data():
                                             encoding='latin1', delimiter=";")
     divorceDistrictAbsolute = divorceDistrictAbsoluteDf.to_dict('records')
 
-    divorceDistrictPro1kDf = pd.read_csv('static/data/scheidung-bezirk-pro1k-2023.CSV', encoding='latin1', delimiter=";")
+    divorceDistrictPro1kDf = pd.read_csv('static/data/scheidung-bezirk-pro1k-2023.CSV', encoding='latin1',
+                                         delimiter=";")
     divorceDistrictPro1k = divorceDistrictPro1kDf.to_dict('records')
 
     divorceMarriageDurationDf = pd.read_csv('static/data/scheidung-ehedauer-prozent.CSV',
@@ -35,7 +36,24 @@ def data():
     divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-prozent.CSV', encoding='latin1', delimiter=";")
     divorceLandPercent = divorceLandPercentDf.to_dict('records')
 
+    # added on column to dataset containing population by state and year
     divorceMonthlyDf = pd.read_csv('static/data/scheidung-monat-2005.CSV', encoding='latin1', delimiter=";")
+
+    # Remove all blanks
+    divorceMonthlyDf.replace(' ', '', regex=True, inplace=True)
+
+    # Convert population and divorce columns to numeric
+    divorceMonthlyDf['Population'] = pd.to_numeric(divorceMonthlyDf['Population'], errors='coerce')
+    for month in ["gesamt", "Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
+                  "Oktober", "November", "Dezember"]:
+        divorceMonthlyDf[month] = pd.to_numeric(divorceMonthlyDf[month], errors='coerce')
+
+    # Calculate divorces per 1k people for each month
+    for month in ["gesamt", "Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
+                  "Oktober", "November", "Dezember"]:
+        divorceMonthlyDf[f'{month}_per_1k'] = divorceMonthlyDf.apply(
+            lambda row: (row[month] / row['Population']) * 1000 if row['Population'] else 0, axis=1)
+
     divorceMonthly = divorceMonthlyDf.to_dict('records')
 
     # return the index file and the data
