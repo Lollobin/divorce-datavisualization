@@ -1,28 +1,9 @@
-const states = Array.from(new Set(divorceMonthly.map(d => d.Bundesland)));
-
-const months = ["Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-
 const nestedData = d3.group(divorceMonthly, d => d.Bundesland);
 
-// Populate dropdown menu
-const stateSelector = d3.select("#stateSelector");
-stateSelector.selectAll("option")
-    .data(states)
-    .enter()
-    .append("option")
-    .text(d => d);
-
 // Set initial state to display
-updateChart(nestedData.get(states[0]));
+updateMonthlyChart(nestedData.get(states[0]));
 
-// Update chart when a different state is selected
-stateSelector.on("change", function () {
-    const selectedState = this.value;
-    const selectedData = nestedData.get(selectedState);
-    updateChart(selectedData);
-});
-
-function updateChart(data) {
+function updateMonthlyChart(data) {
     // Clear any existing chart
     d3.select("#divorceMonthly").selectAll("*").remove();
 
