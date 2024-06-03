@@ -18,17 +18,27 @@
 </div>
 
 <div class="container">
-    <h1>Monthly Divorces in Austria by State</h1>
+    <h1>Monthly Divorces in Austria by State per 1k</h1>
     <label for="stateSelector">Select State:</label>
     <select id="stateSelector"></select>
     <div id="divorceMonthly"></div>
 </div>
 
+<div class="container">
+    <h1>Divorce Rate over Time in %</h1>
+    <div id="divorceRateYears"></div>
+</div>
+
 <script>
-    let divorceMonthly = {{ divorceMonthly | safe}};
+    let divorceMonthly = {{ divorceMonthly | safe}}
     console.log(divorceMonthly);
+    let divorceRate = {{ divorceRate | safe}}
+    console.log(divorceRate);
 </script>
+
+<script src="../static/scripts/util.js"></script>
 <script src="../static/scripts/divorceMonthly.js"></script>
+<script src="../static/scripts/divorceRateYears.js"></script>
 <div id="svg_line_plot" class="svg_line_plot"></div>
 
 </body>

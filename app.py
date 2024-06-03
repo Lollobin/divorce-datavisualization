@@ -24,8 +24,8 @@ def data():
                                             encoding='latin1', delimiter=";")
     divorceMarriageDuration = divorceMarriageDurationDf.to_dict('records')
 
-    divorceTotal1946Df = pd.read_csv('static/data/scheidung-gesamt-1946.CSV', encoding='latin1', delimiter=";")
-    divorceTotal1946 = divorceTotal1946Df.to_dict('records')
+    divorceTotal1951Df = pd.read_csv('static/data/scheidung-gesamt-1951.CSV', encoding='latin1', delimiter=";")
+    divorceTotal1951 = divorceTotal1951Df.to_dict('records')
 
     divorceLandAbsoluteDf = pd.read_csv('static/data/scheidung-land-absolut.CSV', encoding='latin1', delimiter=";")
     divorceLandAbsolute = divorceLandAbsoluteDf.to_dict('records')
@@ -61,7 +61,7 @@ def data():
                            divorceDistricAbsolute=json.dumps(divorceDistrictAbsolute),
                            divorceDistrictPro1k=json.dumps(divorceDistrictPro1k),
                            divorceMarriageDuration=json.dumps(divorceMarriageDuration),
-                           divorceTotal1946=json.dumps(divorceTotal1946),
+                           divorceRate=json.dumps(divorceTotal1951),
                            divorceLandAbsolute=json.dumps(divorceLandAbsolute),
                            divorceLandPro1k=json.dumps(divorceLandPro1k),
                            divorceLandPercent=json.dumps(divorceLandPercent),
