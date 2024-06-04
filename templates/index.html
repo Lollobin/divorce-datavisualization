@@ -29,16 +29,22 @@
     <div id="divorceRateYears"></div>
 </div>
 
+<div class="container">
+    <h1>Divorce by Marriage Duration</h1>
+    <div id="marriageDuration"></div>
+</div>
+
 <script>
-    let divorceMonthly = {{ divorceMonthly | safe}}
-    console.log(divorceMonthly);
-    let divorceRate = {{ divorceRate | safe}}
-    console.log(divorceRate);
+    let divorceMonthly = {{ divorceMonthly | safe }}
+    let divorceRate = {{ divorceRate | safe }}
+    let divorceMarriageDuration = {{ divorceMarriageDuration | safe }}
+    console.log(divorceMarriageDuration);
 </script>
 
 <script src="../static/scripts/util.js"></script>
 <script src="../static/scripts/divorceMonthly.js"></script>
 <script src="../static/scripts/divorceRateYears.js"></script>
+<script src="../static/scripts/marriageDuration.js"></script>
 <div id="svg_line_plot" class="svg_line_plot"></div>
 
 </body>
