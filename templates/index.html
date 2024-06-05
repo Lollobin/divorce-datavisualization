@@ -13,10 +13,24 @@
 <body>
 
 <div class='title_div'>
-    <h1>InfoVis UE 2024 - Exercise 2</h1>
-    <p>Enter your name and Matrikelnummer</p>
+    <!-- Title? -->
 </div>
+<div class="grid">
+    <div class="container heatmap">
+        <!-- TODO: add heatmap/selector for monthly-->
+    </div>
 
+    <div class="container divorceRateYears">
+        <h1>Divorce Rate over Time in %</h1>
+        <div id="divorceRateYears"></div>
+    </div>
+
+    <div class="container divorceMonthly">
+        <h1>Monthly Divorces in Austria by State per 1k</h1>
+        <label for="stateSelector">Select State:</label>
+        <select id="stateSelector"></select>
+        <div id="divorceMonthly"></div>
+    </div>
 <div class="container">
     <h1>Map of Austria</h1>
     <div id="map"></div>
@@ -38,9 +52,10 @@
     <div id="divorceRateYears"></div>
 </div>
 
-<div class="container">
-    <h1>Divorce by Marriage Duration</h1>
-    <div id="marriageDuration"></div>
+    <div class="container marriageDuration">
+        <h1>Divorce by Marriage Duration</h1>
+        <div id="marriageDuration"></div>
+    </div>
 </div>
 
 <script>
