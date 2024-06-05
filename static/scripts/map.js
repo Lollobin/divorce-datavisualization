@@ -66,13 +66,15 @@ let mouseOver = function (d) {
     d3.selectAll(".mapfield")
         .transition()
         .duration(100)
-        .style("stroke", "white")
         .style("opacity", .5)
     d3.select(this)
         .transition()
-        .duration(200)
+        .duration(100)
         .style("opacity", 1)
-        .style("stroke", "black")
+
+    mapTooltip
+    .style("opacity", 1)
+    .style("display", "inline");
 }
 
 
@@ -81,14 +83,49 @@ let mouseLeave = function (d) {
         .transition()
         .duration(100)
         .style("opacity", .8)
-    d3.select(this)
-        .transition()
-        .duration(200)
-        .style("stroke", "white")
+
+    mapTooltip
+    .style("opacity", 0)
+    .style("display", "none");
+
 }
+
+    const mapTooltip = d3.select("#map")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+    const mousemove = function (event, d) {
+        //console.log(d)
+
+        const tooltipText = d.properties.name + " " + dataByYear[slider.value][d.properties.name] + "%";
+        mapTooltip
+            .html(tooltipText)
+            .style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY + "px")
+    }
+
 
 let onClick = function (event, d) {
     changeState(d.properties.name)
+
+    d3.selectAll(".mapfield")
+        .transition()
+        .duration(100)
+        .style("stroke", "white")
+        .style("stroke-width", 1.5)
+    d3.select(this)
+        .transition()
+        .duration(100)
+        .style("stroke", "black")
+        .style("stroke-width", 3)
+
+    this.parentNode.appendChild(this);
 }
 
 mapDiv.append("g")
@@ -104,10 +141,13 @@ mapDiv.append("g")
         .projection(projection)
     )
     .style("stroke", "white")
+    .style("stroke-width",1.5)
+    .style("stroke-opacity", 1)
     .style("opacity", .8)
     .attr("class", "mapfield")
     .on("mouseover", mouseOver)
     .on("mouseleave", mouseLeave)
     .on("click", onClick)
+    .on("mousemove", mousemove)
 
 
