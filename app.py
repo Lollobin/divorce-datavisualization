@@ -33,7 +33,8 @@ def data():
     divorceLandPro1kDf = pd.read_csv('static/data/scheidung-land-pro1k.CSV', encoding='latin1', delimiter=";")
     divorceLandPro1k = divorceLandPro1kDf.to_dict('records')
 
-    divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-prozent.CSV', encoding='latin1', delimiter=";")
+    divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-prozent.CSV', encoding='latin1', delimiter=";", index_col=0)
+    divorceLandPercentDf.reset_index(inplace=True)
     divorceLandPercent = divorceLandPercentDf.to_dict('records')
 
     # added on column to dataset containing population by state and year
@@ -56,6 +57,12 @@ def data():
 
     divorceMonthly = divorceMonthlyDf.to_dict('records')
 
+    #load map data
+    with open('static/maps/laender_95_geo.json', encoding='utf-8') as f:
+        map = json.load(f)
+
+    print(divorceLandPercentDf)
+
     # return the index file and the data
     return render_template("index.html",
                            divorceDistricAbsolute=json.dumps(divorceDistrictAbsolute),
@@ -65,7 +72,9 @@ def data():
                            divorceLandAbsolute=json.dumps(divorceLandAbsolute),
                            divorceLandPro1k=json.dumps(divorceLandPro1k),
                            divorceLandPercent=json.dumps(divorceLandPercent),
-                           divorceMonthly=json.dumps(divorceMonthly))
+                           divorceMonthly=json.dumps(divorceMonthly),
+                           austriaMap=json.dumps(map))
+
 
 
 if __name__ == '__main__':

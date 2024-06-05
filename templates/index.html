@@ -18,6 +18,15 @@
 </div>
 
 <div class="container">
+    <h1>Map of Austria</h1>
+    <div id="map"></div>
+    <div class="slidecontainer">
+        <label for="yearSlider"> Selected year: <span id="selectedYear"></span></label><br/>
+        <span>2005</span><input type="range" min="2005" max="2023" value="2010" class="slider" id="yearSlider"><span>2023</span>
+    </div>
+</div>
+
+<div class="container">
     <h1>Monthly Divorces in Austria by State per 1k</h1>
     <label for="stateSelector">Select State:</label>
     <select id="stateSelector"></select>
@@ -38,13 +47,15 @@
     let divorceMonthly = {{ divorceMonthly | safe }}
     let divorceRate = {{ divorceRate | safe }}
     let divorceMarriageDuration = {{ divorceMarriageDuration | safe }}
-    console.log(divorceMarriageDuration);
+    let austriaMap = {{ austriaMap | safe }};
+    let divorceLandPercent = {{ divorceLandPercent | safe }};
 </script>
 
 <script src="../static/scripts/util.js"></script>
 <script src="../static/scripts/divorceMonthly.js"></script>
 <script src="../static/scripts/divorceRateYears.js"></script>
 <script src="../static/scripts/marriageDuration.js"></script>
+<script src="../static/scripts/map.js"></script>
 <div id="svg_line_plot" class="svg_line_plot"></div>
 
 </body>
