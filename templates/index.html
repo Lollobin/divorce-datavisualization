@@ -19,6 +19,7 @@
 
     <div class="container heatmap">
     <h1>Map of Austria</h1>
+        <button type="button" onclick="deselectStates()" >Deselect states</button>
     <div id="map"></div>
     <div class="slidecontainer">
         <label for="yearSlider"> Selected year: <span id="selectedYear"></span></label><br/>
@@ -33,8 +34,6 @@
 
     <div class="container divorceMonthly">
         <h1>Monthly Divorces in <span id="selectedState"></span> by State per 1k</h1>
-        <label for="stateSelector">Select State:</label>
-        <select id="stateSelector"></select>
         <div id="divorceMonthly"></div>
     </div>
 

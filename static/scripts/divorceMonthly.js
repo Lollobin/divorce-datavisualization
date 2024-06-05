@@ -74,6 +74,14 @@ function updateMonthlyChart(data) {
             .style("top", event.pageY + "px")
     }
 
+    const onLineClick = function (event, d){
+        changeYear(d[0].year)
+    }
+
+    const onLegendClick = function (event, d){
+        changeYear(d)
+    }
+
     groupedData.forEach((values, key) => {
         const lineData = months.map(month => ({
             month: month,
@@ -110,6 +118,7 @@ function updateMonthlyChart(data) {
                     .style("display", "none");
             })
             .on("mousemove", mousemove)
+            .on("click", onLineClick)
             .attr("d", line);
     });
 
@@ -134,7 +143,8 @@ function updateMonthlyChart(data) {
                 .attr("stroke", colorScale(d));
             d3.select(this).select("rect")
                 .attr("stroke", "none");
-        });
+        })
+        .on("click", onLegendClick);
 
     legend.append("rect")
         .attr("x", width - 18)
