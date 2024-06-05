@@ -13,26 +13,16 @@ divorceLandPercent.forEach(item => {
 })
 
 
-console.log(dataByYear)
-
 const allValues = Object.values(dataByYear).flatMap(regionData => Object.values(regionData));
 
-// Convert the comma-separated string values to numbers
-const numericValues = allValues.map(value => parseFloat(value.replace(',', '.')));
-
 // Find the minimum and maximum values using Array.reduce()
-const min = numericValues.reduce((acc, curr) => Math.min(acc, curr), Number.MAX_VALUE);
-const max = numericValues.reduce((acc, curr) => Math.max(acc, curr), Number.MIN_VALUE);
-
-console.log("Minimum value:", min);
-console.log("Maximum value:", max);
-
+const min = allValues.reduce((acc, curr) => Math.min(acc, curr), Number.MAX_VALUE);
+const max = allValues.reduce((acc, curr) => Math.max(acc, curr), Number.MIN_VALUE);
 
 // Set the dimensions and margins of the graph
 const map_margin = {top: 10, right: 30, bottom: 30, left: 60},
     map_width = 800 - map_margin.left - map_margin.right,
     map_height = 400 - map_margin.top - map_margin.bottom;
-
 
 // Adjust color scale domain
 var colorScale = d3.scaleLinear()
@@ -98,11 +88,8 @@ let mouseLeave = function (d) {
 }
 
 let onClick = function (event, d) {
-    console.log(d.properties.name)
+    changeState(d.properties.name)
 }
-
-
-console.log(divorceLandPercent)
 
 mapDiv.append("g")
     .selectAll("path")
@@ -111,7 +98,7 @@ mapDiv.append("g")
     .append("path")
     .attr("fill", function (d) {
         const bundesland = d.properties["name"];
-        return colorScale(parseFloat(dataByYear[slider.value][bundesland]));
+        return colorScale(dataByYear[slider.value][bundesland]);
     })
     .attr("d", d3.geoPath()
         .projection(projection)

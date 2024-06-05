@@ -33,7 +33,7 @@ def data():
     divorceLandPro1kDf = pd.read_csv('static/data/scheidung-land-pro1k.CSV', encoding='latin1', delimiter=";")
     divorceLandPro1k = divorceLandPro1kDf.to_dict('records')
 
-    divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-prozent.CSV', encoding='latin1', delimiter=";", index_col=0)
+    divorceLandPercentDf = pd.read_csv('static/data/scheidung-land-prozent.CSV', encoding='latin1', delimiter=";", index_col=0, decimal=",")
     divorceLandPercentDf.reset_index(inplace=True)
     divorceLandPercent = divorceLandPercentDf.to_dict('records')
 
@@ -61,7 +61,7 @@ def data():
     with open('static/maps/laender_95_geo.json', encoding='utf-8') as f:
         map = json.load(f)
 
-    print(divorceLandPercentDf)
+    #print(divorceLandPercentDf)
 
     # return the index file and the data
     return render_template("index.html",

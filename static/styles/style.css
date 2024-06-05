@@ -16,7 +16,7 @@ body {
 
 .grid {
     display: grid;
-    height: 80%;
+    height: 60%;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: auto auto;
 }

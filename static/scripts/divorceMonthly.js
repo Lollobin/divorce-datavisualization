@@ -1,5 +1,4 @@
 const nestedData = d3.group(divorceMonthly, d => d.Bundesland);
-
 // Set initial state to display
 updateMonthlyChart(nestedData.get(states[0]));
 
