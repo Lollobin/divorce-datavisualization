@@ -13,7 +13,6 @@ function deselectStates(){
 }
 
 function changeYear(newYear){
-    console.log(newYear);
     slider.value = newYear;
     changeMapYear(slider.value);
     selectedYear.innerHTML = slider.value;

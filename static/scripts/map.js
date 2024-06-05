@@ -50,8 +50,7 @@ function changeMapYear(year){
 const slider = document.getElementById("yearSlider");
 const selectedYear = document.getElementById("selectedYear");
 slider.oninput = function (){
-    changeMapYear(slider.value);
-    selectedYear.innerHTML = slider.value;
+    changeYear(slider.value);
 }
 
 slider.style.width = "70%";
