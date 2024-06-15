@@ -11,21 +11,18 @@
 
 </head>
 <body>
-
-<div class='title_div'>
-    <!-- Title? -->
-</div>
 <div class="grid">
 
     <div class="container heatmap">
-    <h1>Map of Austria</h1>
-        <button type="button" onclick="deselectStates()" >Deselect states</button>
-    <div id="map"></div>
-    <div class="slidecontainer">
-        <label for="yearSlider"> Selected year: <span id="selectedYear"></span></label><br/>
-        <span>2005</span><input type="range" min="2005" max="2023" value="2010" class="slider" id="yearSlider"><span>2023</span>
+        <h1>Divorce Rate by State 2005 - 2023</h1>
+        <button class="button" type="button" onclick="deselectStates()">Deselect state</button>
+        <div id="map"></div>
+        <div class="slidecontainer">
+            <label for="yearSlider"> Selected year: <span id="selectedYear"></span></label><br/>
+            <span>2005</span><input type="range" min="2005" max="2023" value="2010" class="slider"
+                                    id="yearSlider"><span>2023</span>
+        </div>
     </div>
-</div>
 
     <div class="container divorceRateYears">
         <h1>Divorce Rate over Time in %</h1>
@@ -33,12 +30,12 @@
     </div>
 
     <div class="container divorceMonthly">
-        <h1>Monthly Divorces in <span id="selectedState"></span> by State per 1k</h1>
+        <h1>Monthly Divorces in <span id="selectedState"></span> per 1k 2005 - 2023</h1>
         <div id="divorceMonthly"></div>
     </div>
 
     <div class="container marriageDuration">
-        <h1>Divorce by Marriage Duration</h1>
+        <h1>Divorce by Marriage Duration in 2023</h1>
         <div id="marriageDuration"></div>
     </div>
 </div>

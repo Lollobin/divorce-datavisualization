@@ -61,7 +61,6 @@ def data():
     with open('static/maps/laender_95_geo.json', encoding='utf-8') as f:
         map = json.load(f)
 
-    #print(divorceLandPercentDf)
 
     # return the index file and the data
     return render_template("index.html",

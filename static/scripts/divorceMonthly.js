@@ -14,12 +14,13 @@ updateMonthlyChart(nestedData.get(states[0]));
 function updateMonthlyChart(data) {
     const parentContainer = document.getElementById('divorceMonthly').parentElement;
     const parentStyle = getComputedStyle(parentContainer);
-    const parentWidth = parentContainer.clientWidth - parseFloat(parentStyle.marginLeft) - parseFloat(parentStyle.marginRight);
+    const parentWidth = parentContainer.clientWidth - parseFloat(parentStyle.paddingLeft) - parseFloat(parentStyle.paddingRight);
+    const parentHeight = parentContainer.clientHeight - parseFloat(parentStyle.paddingLeft) - parseFloat(parentStyle.paddingRight);
 
     // Set dimensions and margins
     const margin = {top: 20, right: 30, bottom: 30, left: 40},
         width = parentWidth - margin.left - margin.right,
-        height = 650 - margin.top - margin.bottom;
+        height = 550 - margin.top - margin.bottom;
 
     // Create SVG container if it doesn't exist
     let svg = d3.select("#divorceMonthly svg");
@@ -63,8 +64,15 @@ function updateMonthlyChart(data) {
     // Group data by year
     const groupedData = d3.group(data, d => d.Jahr);
 
+    var customColours = [
+        '#7f0000', '#ff0000', '#ff8c00', '#ffd700', '#9acd32',
+        '#00ff00', '#006400', '#8fbc8f', '#00fa9a', '#00ffff',
+        '#00bfff', '#0000cd', '#191970', '#8b008b', '#ff00ff',
+        '#ff1493', '#ee82ee', '#d8bfd8', '#ffd8b1'
+    ]
+
     // Define color scale
-    const colorScale = d3.scaleOrdinal(d3.schemeSet3)
+    const colorScale = d3.scaleOrdinal(customColours)
         .domain(Array.from(groupedData.keys()));
 
     const tooltip = d3.select("#divorceMonthly")
@@ -75,14 +83,16 @@ function updateMonthlyChart(data) {
         .style("border", "solid")
         .style("border-width", "1px")
         .style("border-radius", "5px")
-        .style("padding", "10px");
+        .style("padding", "10px")
+        .style("position", "absolute");
 
     const mousemove = function (d) {
         const tooltipText = `Jahr: ${d.toElement.__data__[0]["year"]}`;
+        console.log(event);
         tooltip
             .html(tooltipText)
-            .style("left", event.pageX + 10 + "px")
-            .style("top", event.pageY + "px");
+            .style("left", event.offsetX + 10 + "px")
+            .style("top", event.offsetY + 20 + "px");
     };
 
     const onLineClick = function (event, d) {
@@ -94,7 +104,7 @@ function updateMonthlyChart(data) {
         changeYear(d[0].year);
     };
 
-    const onLegendClick = function (event, d){
+    const onLegendClick = function (event, d) {
         changeYear(d);
     };
 

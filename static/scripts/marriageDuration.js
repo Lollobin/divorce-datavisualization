@@ -11,10 +11,14 @@ function updatePieChart() {
         percentage: 25.7
     }, {duration: "10 bis 25 Jahre", percentage: 39.0}, {duration: "25+", percentage: 12.8}];
 
+    var customColours = [
+        '#c2636f', '#6395c2', '#8FBC8F', '#d8bfd8'
+    ]
+
 // Set up color scale
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d.duration))
-        .range(d3.schemeCategory10);
+        .range(customColours);
 
     // Set up pie layout
     const pie = d3.pie()

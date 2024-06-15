@@ -1,12 +1,38 @@
 body {
-    padding-left: 5em;
     font-family: Calibri, Arial, Helvetica, sans-serif;
     color: #222222;
-    background-color: #fff;
+    background-color: #d5e0f2;
+    margin: 0;
+    height: 100vh;
+}
+
+h1 {
+    margin-block-start: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto 1fr;
+    height: calc(100% - 60px);
+    gap: 20px;
+    padding: 20px;
 }
 
 .container {
-    width: 80%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 0.3rem #d1a7ce);
+}
+
+.button {
+    padding: 5px;
+    background-color: #d5e0f2;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: lightgray;
+    font-weight: bold;
 }
 
 .tooltip {
@@ -14,9 +40,4 @@ body {
     position: absolute;
 }
 
-.grid {
-    display: grid;
-    height: 60%;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto auto;
-}
+
