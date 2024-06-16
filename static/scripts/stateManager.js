@@ -20,3 +20,5 @@ function changeYear(newYear) {
     changeMapYear(slider.value);
     selectedYear.innerHTML = slider.value;
 }
+
+changeYear(2005);
