@@ -1,4 +1,5 @@
 # Interactive Data Visualization of Austrian Divorce Statistics
+![divorcevis-screenshot](https://github.com/user-attachments/assets/760a4b3c-6ea5-4be6-9217-99a25c985d55)
 
 ## Description
 
